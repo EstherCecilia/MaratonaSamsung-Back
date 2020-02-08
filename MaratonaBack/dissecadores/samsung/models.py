@@ -15,6 +15,7 @@ class Prevencao(models.Model):
         return self.name
 
 class Doenca(models.Model):
+    id = models.IntegerField()
     name = models.CharField(max_length=100, primary_key=True)
     prevencao = models.ForeignKey(Prevencao, on_delete=models.CASCADE)
     sintoma = models.ForeignKey(Sintoma, on_delete=models.CASCADE)
