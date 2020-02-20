@@ -16,25 +16,26 @@ class Prevencao(models.Model):
         return self.name
 
 class Doenca(models.Model):
-    id = models.IntegerField()
+    ident = models.IntegerField()
     name = models.CharField(max_length=100, primary_key=True)
-    prevencao = models.ForeignKey(Prevencao, on_delete=models.CASCADE)
-    sintoma = models.ForeignKey(Sintoma, on_delete=models.CASCADE)
+    prevencoes = models.ManyToManyField(Prevencao)
+    sintomas = models.ManyToManyField(Sintoma)
 
     def __str__(self):
         return self.name
 
 
 class Sala(models.Model):
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=100, primary_key=True)
     publica = models.CharField(max_length=100)
-    senha = models.CharField(max_length=50, primary_key=True)
+    senha = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
 class Sessao(models.Model):
-    doenca = models.ForeignKey(Doenca, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, primary_key=True)
+    doencas = models.ManyToManyField(Doenca)
     sala = models.ForeignKey(Sala, on_delete=models.CASCADE)
 
     def __str__(self):
